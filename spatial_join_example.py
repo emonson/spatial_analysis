@@ -40,6 +40,7 @@ print(' {:.2f} s'.format(time.time()-start_t))
 # Read in coordinate data and convert to GDF
 print('Loading ethnicity data... :', end='', flush=True)
 start_t = time.time()
+# Be sure to read 'familyid' as a string or initial zeroes will be lost!
 eth = pd.read_csv(os.path.join(data_dir,data_file), sep=separator, nrows=rows_limit, usecols=data_cols, dtype={'familyid': 'str'})
 # Null locations screw up spatial join later
 eth = eth.dropna(axis=0)
