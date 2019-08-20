@@ -13,7 +13,7 @@ import time
 # Note: there are a lot of unnecessary print() statements just used for timing operations
 start_time = time.time()
 
-data_dir = '/Users/emonson/Dropbox/People/AskData/WenWang'
+data_dir = '/Users/emonson/Dropbox/People/WenWang'
 tracts_dir = 'CENSUS_TRACTS_2000'
 tracts_file = 'CENSUS_TRACTS_2000.shp'
 
@@ -29,6 +29,7 @@ lat_col = 'latitude2012'
 data_cols = [fam_col, lat_col, lon_col]
 
 out_file = 'info_2012_la_ethnicity_subsample_tracts.csv'
+out_shape = 'info_2012_la_ethnicity_subsample_tracts.shp'
 
 # Read in census tracts shapefile
 print('Loading census tracts:', end='', flush=True)
@@ -39,7 +40,7 @@ print(' {:.2f} s'.format(time.time()-start_t))
 # Read in coordinate data and convert to GDF
 print('Loading ethnicity data... :', end='', flush=True)
 start_t = time.time()
-eth = pd.read_csv(os.path.join(data_dir,data_file), sep=separator, nrows=rows_limit, usecols=data_cols)
+eth = pd.read_csv(os.path.join(data_dir,data_file), sep=separator, nrows=rows_limit, usecols=data_cols, dtype={'familyid': 'str'})
 # Null locations screw up spatial join later
 eth = eth.dropna(axis=0)
 print(' {:.2f} s'.format(time.time()-start_t))
@@ -74,6 +75,12 @@ print(' {:.2f} s'.format(time.time()-start_t))
 print('Saving file:', end='', flush=True)
 start_t = time.time()
 eth_tracts[[fam_col,tract_id]].to_csv(os.path.join(data_dir, out_file), index=False, encoding='utf-8')
+print(' {:.2f} s'.format(time.time()-start_t))
+
+# Also saving data to shapefile
+print('Saving shapefile:', end='', flush=True)
+start_t = time.time()
+eth_tracts[['familyid', 'coordinates', 'CT00']].to_file(os.path.join(data_dir, out_shape))
 print(' {:.2f} s'.format(time.time()-start_t))
 
 print('Done. Overall time = {:.2f} s'.format(time.time()-start_time))
