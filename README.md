@@ -15,7 +15,7 @@ distribution, it's easier to get everything working without library conflicts if
 create a separate environment for this GIS work. In the Anaconda Prompt type
 
 ```
-conda create --name GIS pandas geopandas fiona basemap shapely
+conda create --name GIS -c conda-forge pandas geopandas fiona basemap shapely
 ```
 
 then to "activate" this environment, type
