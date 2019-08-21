@@ -28,11 +28,9 @@ lon_col = 'longitude'
 lat_col = 'latitude'
 data_cols = [fam_col, lat_col, lon_col]
 
-# Take the basic data filename, strip off the extension, and add a new ending
-data_file_basename = os.path.splitext(data_file)[0]
-out_file = data_file_basename + '_tracts.csv'
-out_shape = data_file_basename + '_tracts.shp'
-out_shape_dir = data_file_basename + '_SHP'
+out_file = 'la_family_tracts.csv'
+out_shape = 'la_family_points.shp'
+out_shape_dir = 'la_family_SHP'
 
 # Read in census tracts shapefile
 print('Loading census tracts:', end='', flush=True)

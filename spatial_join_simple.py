@@ -1,6 +1,7 @@
 import geopandas as geo
 import pandas as pd
 from shapely.geometry import Point
+import os
 
 # Read in census tracts shapefile
 tracts = geo.read_file('LA_CensusTracts/CENSUS_TRACTS_2000.shp')
@@ -33,4 +34,4 @@ eth_tracts[['familyid','CT00']].to_csv('la_family_tracts.csv', index=False, enco
 # Like to put shapefiles in their own directory since there are multiple files
 if not os.path.exists('la_family_SHP'):
 	os.mkdir('la_family_SHP')
-eth_tracts[['familyid', 'coordinates', 'CT00']].to_file('la_family_points.shp')
+eth_tracts[['familyid', 'coordinates', 'CT00']].to_file('la_family_SHP/la_family_points.shp')
