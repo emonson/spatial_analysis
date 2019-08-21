@@ -26,11 +26,12 @@ conda activate GIS
 
 ## Example scripts
 
-The [spatial_join_simple.py]() file shows a minimal example of the procedure. That's
-a good place to start.
+The [spatial_join_simple.py](spatial_join_simple.py) file shows a minimal example 
+of the procedure. That's a good place to start.
 
-The [spatial_join_timed.py](spatial_join_timed.py) script uses the same basic procedure, but includes timing
-of the stages of the routine. This script also lays out file and column names in 
+The [spatial_join_timed.py](spatial_join_timed.py) script uses the same basic procedure, 
+but includes timing of the stages of the routine. 
+This script also lays out file and column names in 
 variables at the top, which is a better general procedure rather than having them 
 scattered throughout the script.
 Only the necessary columns are loaded in to the [Pandas](https://pandas.pydata.org/) 
@@ -40,6 +41,7 @@ DataFrame from the CSV file.
 
 We ran a similar script with InfoUSA data and whole US census tracts shapefiles
 on the DVS Lab machines with various numbers of rows of lat/lon pairs. The 
-[GeoPandasArcProComparison.png]() file shows how long it took in ArcPro vs GeoPandas for
+[GeoPandasArcProComparison.png](GeoPandasArcProComparison.png) file shows how 
+long it took in ArcPro vs GeoPandas for
 converting the coordinates to the `Point()` data type, for reprojecting the points into
 the coordinate system of the census tracts, and for doing the spatial join.
