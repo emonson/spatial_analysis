@@ -37,7 +37,7 @@ scattered throughout the script.
 Only the necessary columns are loaded in to the [Pandas](https://pandas.pydata.org/) 
 DataFrame from the CSV file.
 
-## Timing
+## Performance timing
 
 We ran a similar script with InfoUSA data and whole US census tracts shapefiles
 on the DVS Lab machines with various numbers of rows of lat/lon pairs. The 
