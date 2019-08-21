@@ -29,7 +29,7 @@ conda activate GIS
 The [spatial_join_simple.py]() file shows a minimal example of the procedure. That's
 a good place to start.
 
-The [spatial_join_timed.py]() script uses the same basic procedure, but includes timing
+The [spatial_join_timed.py](spatial_join_timed.py) script uses the same basic procedure, but includes timing
 of the stages of the routine. This script also lays out file and column names in 
 variables at the top, which is a better general procedure rather than having them 
 scattered throughout the script.
