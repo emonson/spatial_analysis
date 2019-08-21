@@ -13,23 +13,26 @@ import time
 # Note: there are a lot of unnecessary print() statements just used for timing operations
 start_time = time.time()
 
-data_dir = '/Users/emonson/Dropbox/People/WenWang'
-tracts_dir = 'CENSUS_TRACTS_2000'
+data_dir = '.'
+tracts_dir = 'LA_CensusTracts'
 tracts_file = 'CENSUS_TRACTS_2000.shp'
 
 # This is the field we want to pull over from the shapefile with this spatial join
 tract_id = 'CT00'
-data_file = 'info_2012_la_ethnicity_subsample.csv'
+data_file = 'la_family_data.csv'
 separator = ','
 rows_limit = None
 # Only reading in some of the columns for this operation
 fam_col = 'familyid'
-lon_col = 'longitude2012'
-lat_col = 'latitude2012'
+lon_col = 'longitude'
+lat_col = 'latitude'
 data_cols = [fam_col, lat_col, lon_col]
 
-out_file = 'info_2012_la_ethnicity_subsample_tracts.csv'
-out_shape = 'info_2012_la_ethnicity_subsample_tracts.shp'
+# Take the basic data filename, strip off the extension, and add a new ending
+data_file_basename = os.path.splitext(data_file)[0]
+out_file = data_file_basename + '_tracts.csv'
+out_shape = data_file_basename + '_tracts.shp'
+out_shape_dir = data_file_basename + '_SHP'
 
 # Read in census tracts shapefile
 print('Loading census tracts:', end='', flush=True)
@@ -78,10 +81,13 @@ start_t = time.time()
 eth_tracts[[fam_col,tract_id]].to_csv(os.path.join(data_dir, out_file), index=False, encoding='utf-8')
 print(' {:.2f} s'.format(time.time()-start_t))
 
-# Also saving data to shapefile
+# Also saving data to shapefile (into its own directory to help keep files together)
+out_shape_dir_path = os.path.join(data_dir, out_shape_dir)
+if not os.path.exists(out_shape_dir_path):
+	os.mkdir(out_shape_dir_path)
 print('Saving shapefile:', end='', flush=True)
 start_t = time.time()
-eth_tracts[['familyid', 'coordinates', 'CT00']].to_file(os.path.join(data_dir, out_shape))
+eth_tracts[['familyid', 'coordinates', 'CT00']].to_file(os.path.join(out_shape_dir_path, out_shape))
 print(' {:.2f} s'.format(time.time()-start_t))
 
 print('Done. Overall time = {:.2f} s'.format(time.time()-start_time))
